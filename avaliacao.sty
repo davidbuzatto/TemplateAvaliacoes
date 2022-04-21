@@ -1,0 +1,559 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{avaliacao}[2022/04/21 Template para Avaliacoes - Prof. David Buzatto]
+
+\RequirePackage{lmodern}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[portuges]{babel}
+\RequirePackage{lastpage}
+\RequirePackage{color}
+\RequirePackage{array}
+\RequirePackage{fancyhdr}
+\RequirePackage[final]{graphicx}
+\RequirePackage{microtype}
+\RequirePackage[table,xcdraw]{xcolor}
+\RequirePackage{hyperref}
+\RequirePackage{subcaption}
+\RequirePackage{epigraph}
+\RequirePackage{url}
+\RequirePackage{placeins}
+\RequirePackage{multirow}
+\RequirePackage[figuresright]{rotating}
+\RequirePackage{chemfig}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{enumitem}
+\RequirePackage{bigints}
+\RequirePackage{environ}
+\RequirePackage[cache=false]{minted}
+\RequirePackage[final]{pdfpages}
+\RequirePackage{calc,soul,fourier}
+\RequirePackage{lettrine}
+\RequirePackage{calligra}
+\RequirePackage{xparse}
+\RequirePackage{textcomp}
+\RequirePackage{wrapfig}
+\RequirePackage{etoolbox}
+\RequirePackage{xpatch}
+\RequirePackage[margin=1cm]{geometry}
+\RequirePackage[alf,abnt-emphasize=bf]{abntex2cite}
+\RequirePackage{tcolorbox}
+\RequirePackage{tikz}
+\RequirePackage{tkz-euclide}
+\usetikzlibrary{positioning}
+\tcbuselibrary{minted,skins,breakable,xparse}
+\RequirePackage{epstopdf}
+\RequirePackage{scalerel}
+
+\DeclareOption{java}{
+    \ifdefined\linguagemJava
+    \else
+        \newcommand{\linguagemJava}{}
+    \fi
+}
+
+\DeclareOption{c}{
+    \ifdefined\linguagemC
+    \else
+        \newcommand{\linguagemC}{}
+    \fi
+}
+
+\DeclareOption{cpp}{
+    \ifdefined\linguagemCPP
+    \else
+        \newcommand{\linguagemCPP}{}
+    \fi
+}
+
+\DeclareOption{algoritmos}{
+    \ifdefined\topicoAlgoritmos
+    \else
+        \newcommand{\topicoAlgoritmos}{}
+    \fi
+}
+
+\DeclareOption{esd}{
+    \ifdefined\topicoESD
+    \else
+        \newcommand{\topicoESD}{}
+    \fi
+}
+
+%\ExecuteOptions{c}
+
+\ProcessOptions\relax
+
+% código a partir daqui
+\selectlanguage{portuges}
+\frenchspacing 
+\renewcommand\chaptitlefont{\normalfont\huge\bfseries\scshape\color{corTema}}
+
+% contador de questões
+\newcounter{questao}[chapter]
+
+% colunas para tabelas
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\newcommand{\curso}[1]{\def \ocurso {#1}}
+\newcommand{\imprimircurso}{\ocurso}
+
+\newcommand{\nomeDisciplina}[1]{\def \oNomeDisciplina {#1}}
+\newcommand{\imprimirNomeDisciplina}{\oNomeDisciplina}
+
+\newcommand{\siglaDisciplina}[1]{\def \aSiglaDisciplina {#1}}
+\newcommand{\imprimirSiglaDisciplina}{\aSiglaDisciplina}
+
+\newcommand{\professorDisciplina}[1]{\def \oProfessorDisciplina {#1}}
+\newcommand{\imprimirProfessorDisciplina}{\oProfessorDisciplina}
+
+\newcommand{\data}[1]{\def \aData {#1}}
+\newcommand{\imprimirData}{\aData}
+
+\newcommand{\hora}[1]{\def \aHora {#1}}
+\newcommand{\imprimirHora}{\aHora}
+
+
+
+
+
+
+
+% listas compactas
+\setlist[itemize]{noitemsep,nolistsep}
+\setlist[enumerate]{noitemsep,nolistsep}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot{}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+%\fancyfoot[C]{\thepage}
+
+\definecolor{corTema}{RGB}{0, 66, 137}
+\definecolor{corQuestoes}{RGB}{0, 66, 137}
+\definecolor{corFundoCaixasCodigo}{RGB}{245,245,245}
+
+\setsecnumdepth{subsection}
+\maxtocdepth{subsection}
+
+%\makeatletter não é necessário em arquivos .sty
+\newlength\dlf@normtxtw
+\setlength\dlf@normtxtw{\textwidth}
+\def\myhelvetfont{\def\sfdefault{mdput}}
+\newsavebox{\feline@chapter}
+\newcommand\feline@chapter@marker[1][4cm]{%
+    \sbox\feline@chapter{%
+        \resizebox{!}{#1}{\fboxsep=1pt%
+            \colorbox{corTema}{\color{white}\bfseries\sffamily\thechapter}%
+    }}%
+    \rotatebox{90}{%
+        \resizebox{%
+            \heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}%
+        {!}{\scshape\so\@chapapp}}\quad%
+    \raisebox{\depthof{\usebox{\feline@chapter}}}{\usebox{\feline@chapter}}%
+}
+\newcommand\feline@chm[1][4cm]{%
+    \sbox\feline@chapter{\feline@chapter@marker[#1]}%
+    \makebox[0pt][l]{% aka \rlap
+        \makebox[1cm][r]{\usebox\feline@chapter}%
+}}
+\makechapterstyle{daleif1}{
+    \renewcommand\chapnamefont{\normalfont\Large\scshape\raggedleft\so}
+    \renewcommand\chapternamenum{}
+    \renewcommand\printchaptername{}
+    \renewcommand\printchapternum{\null\hfill\feline@chm[2.5cm]\par}
+    \renewcommand\afterchapternum{\par\vskip\midchapskip}
+    \renewcommand\printchaptertitle[1]{\chaptitlefont\raggedleft ##1\par}
+}
+%\makeatother não é necessário em arquivos .sty
+\chapterstyle{daleif1}
+
+
+% claro
+\newcommand{\temaClaro}{%
+    \definecolor{corFundoCaixasES}{RGB}{245,245,245}%
+    \definecolor{corTextoCaixasES}{RGB}{0,0,0}%
+    \definecolor{phantom}{RGB}{220, 220, 220}%
+}
+
+\newcommand{\temaEscuro}{%
+    \definecolor{corFundoCaixasES}{RGB}{0,0,0}%
+    \definecolor{corTextoCaixasES}{RGB}{245,245,245}%
+    \definecolor{phantom}{RGB}{40, 40, 40}%
+}
+
+% caractere para espaço
+\newcommand{\phs}{\textcolor{phantom}{\texttt{*}}}
+
+\tcbset{
+    listing engine=minted,
+    minted options={fontsize=\small,linenos,numbersep=3mm,breaklines},
+    colback=corFundoCaixasCodigo,
+    colframe=corTema!40,
+    fonttitle=\bfseries,
+    listing only,
+    left=7mm,
+    enhanced,
+    breakable,
+    drop fuzzy shadow,
+    overlay={\begin{tcbclipinterior}\fill[corTema!40](frame.south west)rectangle([xshift=7mm]frame.north west);\end{tcbclipinterior}}
+}
+
+% remove fcolorbox do minted caso haja caracteres não válidos no código
+%\makeatletter não é necessário em arquivos .sty
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\xpatchcmd{\inputminted}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+%\makeatother não é necessário em arquivos .sty
+
+% blocos de código
+\newtcblisting{blocoJava}{
+    colframe=corTema,
+    minted language=java%
+}
+
+\newtcblisting{blocoC}{
+    colframe=corTema,
+    minted language=c%
+}
+
+\newtcblisting{blocoCPP}{
+    colframe=corTema,
+    minted language=cpp%
+}
+
+\newtcblisting{blocoHTML}{
+    colframe=corTema,
+    minted language=html%
+}
+
+\newtcblisting{blocoJavaScript}{
+    colframe=corTema,
+    minted language=javascript%
+}
+
+\newtcblisting{blocoCSS}{
+    colframe=corTema,
+    minted language=css%
+}
+
+\newtcblisting{blocoSQL}{
+    colframe=corTema,
+    minted language=sql%
+}
+
+
+% arquivos de código
+\newtcbinputlisting{\arquivoJava}[3][]{%
+    listing file={#3},
+    title=\texttt{#2},
+    colframe=corTema,
+    minted language=java
+}
+
+\newtcbinputlisting{\arquivoC}[3][]{%
+    listing file={#3},
+    title=\texttt{#2},
+    colframe=corTema,
+    minted language=c
+}
+
+\newtcbinputlisting{\arquivoCPP}[3][]{%
+    listing file={#3},
+    title=\texttt{#2},
+    colframe=corTema,
+    minted language=cpp
+}
+
+\newtcbinputlisting{\arquivoHTML}[3][]{%
+    listing file={#3},
+    title=\texttt{#2},
+    colframe=corTema,
+    minted language=html
+}
+
+\newtcbinputlisting{\arquivoJavaScript}[3][]{%
+    listing file={#3},
+    title=\texttt{#2},
+    colframe=corTema,
+    minted language=javascript
+}
+
+\newtcbinputlisting{\arquivoCSS}[3][]{%
+    listing file={#3},
+    title=\texttt{#2},
+    colframe=corTema,
+    minted language=css
+}
+
+\newtcbinputlisting{\arquivoSQL}[3][]{%
+    listing file={#3},
+    title=\texttt{#2},
+    colframe=corTema,
+    minted language=sql
+}
+
+
+
+
+
+\newcommand{\entradaSaidaBase}[3]
+{%
+    \if\relax\detokenize{#2}\relax%
+    %
+    \else%
+    \begin{tcolorbox}[reset,enhanced,title=\textbf{Entrada},colback=corFundoCaixasES,colframe=#1,drop fuzzy shadow,left=2mm]
+        \textcolor{corTextoCaixasES}{\texttt{#2}}
+    \end{tcolorbox}
+    \fi%
+    \if\relax\detokenize{#3}\relax%
+    %
+    \else%
+    \begin{tcolorbox}[reset,enhanced,title=\textbf{Saída},colback=corFundoCaixasES,colframe=#1,drop fuzzy shadow,left=2mm]
+        \textcolor{corTextoCaixasES}{\texttt{#3}}
+    \end{tcolorbox}
+    \fi\vspace{0.3cm}%
+}%
+{}%
+
+\newcommand{\entradaSaidaListagem}[2]{\entradaSaidaBase{corTema}{#1}{#2}}%
+\newcommand{\entradaSaidaQuestao}[2]{\entradaSaidaBase{corQuestoes}{#1}{#2}}%
+\newcommand{\entradaSaidaQuestaoE}[2]{\entradaSaidaBase{corQuestoes!60!black}{#1}{#2}}%
+
+
+\NewDocumentEnvironment{tarefaBase}{mmmmmm}
+{%
+    \refstepcounter{#1}\par\medskip%
+    \noindent \textcolor{#3}{\textbf{#2~\thequestao~-~(#6):}} \rmfamily%
+}%
+{%
+    
+    \textcolor{#3}{\textbf{Arquivo com a solução: \underline{q\thequestao.\ifdefined\linguagemC c\fi\ifdefined\linguagemJava java\fi}}}
+    
+    \entradaSaidaBase{#3}{#4}{#5}
+}%
+
+\NewDocumentEnvironment{tarefaBaseD}{mmmm}
+{%
+    \refstepcounter{#1}\par\medskip%
+    \noindent \textcolor{#3}{\textbf{#2~\thequestao~-~(#4):}} \rmfamily%
+}%
+{%
+}%
+
+
+\NewDocumentEnvironment{questaoProgramacao}{mmm}
+{\begin{tarefaBase}{questao}{Questão}{corQuestoes}{#2}{#3}{#1}}%
+{\end{tarefaBase}}%
+
+\NewDocumentEnvironment{questaoDissertativa}{m}
+{\begin{tarefaBaseD}{questao}{Questão}{corQuestoes}{#1}}%
+{\end{tarefaBaseD}}%
+
+%\makeatletter não é necessário em arquivos .sty
+\hypersetup{
+    pdftitle={\@title}, 
+    pdfauthor={\@author},
+    pdfsubject={Avaliação},
+    pdfcreator={Temlate Desenvolvido por Prof. Dr. David Buzatto},
+    pdfkeywords={Avaliação}, 
+    colorlinks=false,
+    hidelinks,
+    bookmarksdepth=4
+}
+%\makeatother não é necessário em arquivos .sty
+
+
+\newcommand{\citeauthorandyear}[1]{\citeauthoronline{#1} (\citeyear{#1})}
+
+% células com quebra de linha automática
+\newcommand{\specialcell}[2][c]{%
+    \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{0cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% caixinhas de destaque
+\newtcbox{\destaque}{
+    reset,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colframe=corTema,
+    coltext=black,
+    colback=black!5!white,
+    drop fuzzy shadow,
+    arc=3pt
+}
+
+\MakeRobust\destaque
+
+\ifdefined\pdfstringdefDisableCommands
+  \pdfstringdefDisableCommands{\def\destaque#1{'#1'}}
+\fi
+
+
+% códigos inline
+\DeclareTotalTCBox{\inlineJava}{ s v }{
+    reset,
+    listing only,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colback=corFundoCaixasCodigo,
+    colframe=corTema,
+    drop fuzzy shadow,
+    arc=3pt}
+{\mintinline{java}{#2}}%
+
+\DeclareTotalTCBox{\inlineC}{ s v }{
+    reset,
+    listing only,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colback=corFundoCaixasCodigo,
+    colframe=corTema,
+    drop fuzzy shadow,
+    arc=3pt}
+{\mintinline{c}{#2}}%
+
+\DeclareTotalTCBox{\inlineCPP}{ s v }{
+    reset,
+    listing only,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colback=corFundoCaixasCodigo,
+    colframe=corTema,
+    drop fuzzy shadow,
+    arc=3pt}
+{\mintinline{cpp}{#2}}%
+
+\DeclareTotalTCBox{\inlineHTML}{ s v }{
+    reset,
+    listing only,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colback=corFundoCaixasCodigo,
+    colframe=corTema,
+    drop fuzzy shadow,
+    arc=3pt}
+{\mintinline{html}{#2}}%
+
+\DeclareTotalTCBox{\inlineJavaScript}{ s v }{
+    reset,
+    listing only,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colback=corFundoCaixasCodigo,
+    colframe=corTema,
+    drop fuzzy shadow,
+    arc=3pt}
+{\mintinline{javascript}{#2}}%
+
+\DeclareTotalTCBox{\inlineCSS}{ s v }{
+    reset,
+    listing only,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colback=corFundoCaixasCodigo,
+    colframe=corTema,
+    drop fuzzy shadow,
+    arc=3pt}
+{\mintinline{css}{#2}}%
+
+\DeclareTotalTCBox{\inlineSQL}{ s v }{
+    reset,
+    listing only,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colback=corFundoCaixasCodigo,
+    colframe=corTema,
+    drop fuzzy shadow,
+    arc=3pt}
+{\mintinline{sql}{#2}}%
+
+% borda em texto
+\newcommand{\cfbox}[1]{%
+    \adjustbox{cfbox=#1}%
+}
+
+% código até aqui
+
+\endinput
