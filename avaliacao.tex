@@ -11,17 +11,17 @@
     %draft
 ]{memoir}
 
-\usepackage[c]{avaliacao}
+\usepackage[c]{estrutura}
 
 %\temaClaro
 \temaEscuro
 
-\curso{Bacharelado em Ciência da Computação}
+\curso{Nome do Curso}
 \nomeDisciplina{Nome da Disciplina}
 \siglaDisciplina{SIGLA}
-\professorDisciplina{Prof. Dr. David Buzatto}
+\professorDisciplina{Prof. Dr. Fulano de Tal}
 
-\data{dd/mm/aaaa}
+\data{01/01/2000}
 \hora{00h00 às 00h00}
 
 
@@ -30,10 +30,6 @@
 \mainmatter
 
 \input{cabecalho}
-
-\textbf{Atenção:} para entregar as questões da avaliação, crie um pacote no JJudge e faça o envio na atividade da avaliação disponibilizada no Moodle.
-
-
 
 \begin{questaoProgramacao}{1,0}{Detalhe da entrada esperada}{Detalhe da saída esperada}
     Esse é um exemplo de questão de programação
@@ -45,192 +41,6 @@
     Esse é um exemplo de questão dissertativa.
 \end{questaoDissertativa}
 
-
-
-\begin{questaoProgramacao}{1,0}{Primeiro numero: 7.5\\Segundo numero: 3.5}{7.50 + 3.50 = 11.00\\7.50 - 3.50 = 4.00\\7.50 * 3.50 = 26.25\\7.50 / 3.50 = 2.14}
-    Escreva um programa que peça para o usuário fornecer o valor de dois números decimais. O programa deve usar o valor dos números para calcular o valor das quatro operações aritméticas básicas (adição, subtração, multiplicação e divisão). O resultado de cada operação deve ser armazenado em uma variável diferente. No final, o programa deve exibir ao usuário o resultado de cada operação, formatados usando duas casas decimais.
-\end{questaoProgramacao}
-
-
-
-\begin{questaoProgramacao}{1,0}{Altura: 5}{*\\
-**\\
-***\\
-****\\
-*****}
-    Escreva um programa que leia um número inteiro no intervalo de 1, inclusive, até 20, inclusive. Esse valor representa a altura de um triângulo, que deverá ser desenhado de acordo com o padrão apresentado abaixo. Você deve usar, obrigatoriamente, a estrutura de repetição \texttt{for}. Se a altura fornecida estiver fora do intervalo, o programa deve avisar o usuário e pedi-la novamente.
-\end{questaoProgramacao}
-\entradaSaidaQuestaoE{Altura: -5\\Altura invalida, forneca-a novamente!\\Altura: 3}{*\\
-**\\
-***}
-
-
-
-\begin{questaoProgramacao}{2,0}{}{}
-    Utilize o modelo abaixo para testar a implementação das seguintes funções:
-    
-    \begin{enumerate}
-    
-        \item \inlineC{void somatorioMedia( const int a[], int n, int *somatorio, int *media )} (1,0):
-        \begin{itemize}
-            \item Calcula o somatório e a média aritmética dos valores de um array de inteiros.
-            \begin{itemize}
-                \item \destaque{a:} um array de inteiros;
-                \item \destaque{n:} a quantidade de elementos do array;
-                \item \destaque{somatorio:} um ponteiro para a variável que armazenará o somatório de todos os valores contidos no array após a execução;
-                \item \destaque{media:} um ponteiro para a variável que armazenará a média de todos os valores contidos no array após a execução.
-            \end{itemize}
-        \end{itemize}
-        
-        \item \inlineC{int contarVogais( const char *str )} (1,0):
-        \begin{itemize}
-            \item Conta a quantidade de vogais, tanto minúsculas quanto maiúsculas, contidas em uma string e retorna a contagem.
-            \begin{itemize}
-                \item \destaque{str:} a string a ser verificada.
-            \end{itemize}
-        \end{itemize}
-        
-    \end{enumerate}
-    
-\begin{blocoC}
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-#include <math.h>
-#include <ctype.h>
-
-void somatorioMedia( const int a[], int n, int *somatorio, int *media );
-int contarVogais( const char *str );
-
-int main() {
-
-    int numSM[5] = { 4, 5, 3, 1, 7 };
-    char strv[] = "Avaliacao de CALC1";
-    int s;
-    int m;
-    int cv;
-
-    somatorioMedia( numSM, 5, &s, &m );
-    cv = contarVogais( strv );
-
-    printf( "Somatorio: %d\nMedia: %d\n", s, m );
-    printf( "Quantidade de vogais na string: %d\n", cv );
-
-    return 0;
-
-}
-
-void somatorioMedia( const int a[], int n, int *somatorio, int *media ) {
-    // sua implementação aqui...
-}
-
-int contarVogais( const char *str ) {
-    // sua implementação aqui...
-}
-\end{blocoC}
-
-\entradaSaidaQuestao{}{Somatorio: 20\\
-Media: 4\\
-Quantidade de vogais na string: 8}
-    
-\end{questaoProgramacao}
-
-
-
-\begin{questaoProgramacao}{4,0}{}{}
-    Utilize o modelo abaixo para testar a implementação das seguintes funções:
-    
-    \begin{enumerate}
-    
-        \item \inlineC{void converterParaMaiusculas( char *str )} (1,5):
-        \begin{itemize}
-            \item Gera a versão em maiúsculas de uma string qualquer.
-            \begin{itemize}
-                \item \destaque{str:} string que será processada.
-            \end{itemize}
-        \end{itemize}
-        
-        \item \inlineC{int compararCor( Cor *c1, Cor *c2 )} (2,5):
-        \begin{itemize}
-            \item Compara duas cores, retornando um valor negativo caso \destaque{c1} seja menor que \destaque{c2}, positivo caso \destaque{c1} seja maior que \destaque{c2} ou zero caso as duas cores sejam iguais.
-            \begin{itemize}
-                \item \destaque{c1:} um ponteiro para um cor;
-                \item \destaque{c2:} um ponteiro para outra cor.
-            \end{itemize}
-            Considere que a estrutura \texttt{Cor} foi definida como:
-\begin{blocoC}
-typedef struct {
-    int vermelho;
-    int verde;
-    int azul;
-} Cor;
-\end{blocoC}
-            O primeiro critério de comparação de duas cores que deve ser adotado é o de que o componente vermelho tem prioridade, ou seja, quanto mais vermelho, maior a cor. O segundo critério é para o componente verde, quanto mais verde, maior. Por fim, deve ser adotado o mesmo critério para o componente azul. De forma análoga a uma data, o vermelho da cor corresponde ao ano de uma data, o verde ao mês e o azul ao dia.
-                \end{itemize}
-    
-    \end{enumerate}
-
-\begin{blocoC}
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-#include <math.h>
-#include <ctype.h>
-
-typedef struct {
-    int vermelho;
-    int verde;
-    int azul;
-} Cor;
-
-void converterParaMaiusculas( char *str );
-int compararCor( Cor *c1, Cor *c2 );
-
-int main() {
-
-    char strMai[] = "Avaliacao de CALC1";
-    Cor c1 = { .vermelho = 200, .verde = 100, .azul = 150 };
-    Cor c2 = { .vermelho = 200, .verde = 150, .azul = 100 };
-
-    converterParaMaiusculas( strMai );
-
-    printf( "Versao em maiusculas: %s\n", strMai );
-
-    printf( "Cores em ordem crescente:\n" );
-    if ( compararCor( &c1, &c2 ) < 0 ) {
-        printf( "rgb{%d, %d, %d} <= rgb{%d, %d, %d}\n",
-               c1.vermelho, c1.verde, c1.azul,
-               c2.vermelho, c2.verde, c2.azul );
-    } else {
-        printf( "rgb{%d, %d, %d} <= rgb{%d, %d, %d}\n",
-               c2.vermelho, c2.verde, c2.azul,
-               c1.vermelho, c1.verde, c1.azul );
-    }
-
-    return 0;
-
-}
-
-void converterParaMaiusculas( char *str ) {
-    // sua implementação aqui...
-}
-
-int compararCor( Cor *c1, Cor *c2 ) {
-    // sua implementação aqui...
-}
-\end{blocoC}
-
-\entradaSaidaQuestao{}{Versao em maiusculas: AVALIACAO DE CALC1\\
-Cores em ordem crescente:\\
-rgb\{200, 100, 150\} <= rgb\{200, 150, 100\}}
-    
-\end{questaoProgramacao}
-
-
-
-\arquivoC{Solução do Exercício Anterior}{fontes/solucaoExCor.c}
 
 
 {\raggedleft \textbf{Boa sorte!}\par}
