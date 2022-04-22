@@ -44,6 +44,12 @@
 \tcbuselibrary{minted,skins,breakable,xparse}
 \RequirePackage{epstopdf}
 \RequirePackage{scalerel}
+\RequirePackage{expl3}
+
+% criando o comando \Repeat
+\ExplSyntaxOn
+\cs_new_eq:NN \Repeat \prg_replicate:nn
+\ExplSyntaxOff
 
 \DeclareOption{java}{
     \ifdefined\linguagemJava
@@ -552,6 +558,13 @@
 % borda em texto
 \newcommand{\cfbox}[1]{%
     \adjustbox{cfbox=#1}%
+}
+
+% comando para gerar linhas
+\newcommand{\gerarLinhas}[1]{%
+    \begin{tabular}{ p{\textwidth} }
+        \Repeat{#1}{\rule{0pt}{12pt} \hrulefill \\}
+    \end{tabular}
 }
 
 % código até aqui
