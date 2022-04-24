@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{avaliacao}[2022/04/21 Template para Avaliações - Prof. Dr. David Buzatto]
+\ProvidesPackage{estrutura}[2022/04/21 Template para Avaliações - Prof. Dr. David Buzatto]
 
 \RequirePackage{lmodern}
 \RequirePackage[T1]{fontenc}
@@ -197,7 +197,7 @@
 
 \tcbset{
     listing engine=minted,
-    minted options={fontsize=\small,linenos,numbersep=3mm,breaklines},
+    minted options={linenos,numbersep=3mm,breaklines},
     colback=corFundoCaixasCodigo,
     colframe=corTema!40,
     fonttitle=\bfseries,
@@ -217,90 +217,118 @@
 %\makeatother não é necessário em arquivos .sty
 
 % blocos de código
-\newtcblisting{blocoJava}{
+\NewTCBListing{blocoJava}{ !O{\normalsize} }{
     colframe=corTema,
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
     minted language=java%
 }
 
-\newtcblisting{blocoC}{
+\NewTCBListing{blocoC}{ !O{\normalsize} }{
     colframe=corTema,
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
     minted language=c%
 }
 
-\newtcblisting{blocoCPP}{
+\NewTCBListing{blocoCPP}{ !O{\normalsize} }{
     colframe=corTema,
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
     minted language=cpp%
 }
 
-\newtcblisting{blocoHTML}{
+\NewTCBListing{blocoHTML}{ !O{\normalsize} }{
     colframe=corTema,
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
     minted language=html%
 }
 
-\newtcblisting{blocoJavaScript}{
+\NewTCBListing{blocoJavaScript}{ !O{\normalsize} }{
     colframe=corTema,
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
     minted language=javascript%
 }
 
-\newtcblisting{blocoCSS}{
+\NewTCBListing{blocoCSS}{ !O{\normalsize} }{
     colframe=corTema,
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
     minted language=css%
 }
 
-\newtcblisting{blocoSQL}{
+\NewTCBListing{blocoSQL}{ !O{\normalsize} }{
     colframe=corTema,
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
     minted language=sql%
+}
+
+\NewTCBListing{blocoText}{ !O{\normalsize} }{
+    colframe=corTema,
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
+    minted language=text%
 }
 
 
 % arquivos de código
-\newtcbinputlisting{\arquivoJava}[3][]{%
-    listing file={#3},
-    title=\texttt{#2},
+\NewTCBInputListing{\arquivoJava}{ m m !O{\normalsize} }{%
+    title=\texttt{#1},
+    listing file={#2},
     colframe=corTema,
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
     minted language=java
 }
 
-\newtcbinputlisting{\arquivoC}[3][]{%
-    listing file={#3},
-    title=\texttt{#2},
+\NewTCBInputListing{\arquivoC}{ m m !O{\normalsize} }{%
+    title=\texttt{#1},
+    listing file={#2},
     colframe=corTema,
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
     minted language=c
 }
 
-\newtcbinputlisting{\arquivoCPP}[3][]{%
-    listing file={#3},
-    title=\texttt{#2},
+\NewTCBInputListing{\arquivoCPP}{ m m !O{\normalsize} }{%
+    title=\texttt{#1},
+    listing file={#2},
     colframe=corTema,
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
     minted language=cpp
 }
 
-\newtcbinputlisting{\arquivoHTML}[3][]{%
-    listing file={#3},
-    title=\texttt{#2},
+\NewTCBInputListing{\arquivoHTML}{ m m !O{\normalsize} }{%
+    title=\texttt{#1},
+    listing file={#2},
     colframe=corTema,
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
     minted language=html
 }
 
-\newtcbinputlisting{\arquivoJavaScript}[3][]{%
-    listing file={#3},
-    title=\texttt{#2},
+\NewTCBInputListing{\arquivoJavaScript}{ m m !O{\normalsize} }{%
+    title=\texttt{#1},
+    listing file={#2},
     colframe=corTema,
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
     minted language=javascript
 }
 
-\newtcbinputlisting{\arquivoCSS}[3][]{%
-    listing file={#3},
-    title=\texttt{#2},
+\NewTCBInputListing{\arquivoCSS}{ m m !O{\normalsize} }{%
+    title=\texttt{#1},
+    listing file={#2},
     colframe=corTema,
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
     minted language=css
 }
 
-\newtcbinputlisting{\arquivoSQL}[3][]{%
-    listing file={#3},
-    title=\texttt{#2},
+\NewTCBInputListing{\arquivoSQL}{ m m !O{\normalsize} }{%
+    title=\texttt{#1},
+    listing file={#2},
     colframe=corTema,
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
     minted language=sql
+}
+
+\NewTCBInputListing{\arquivoText}{ m m !O{\normalsize} }{%
+    title=\texttt{#1},
+    listing file={#2},
+    colframe=corTema,
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
+    minted language=text
 }
 
 
@@ -554,6 +582,26 @@
     drop fuzzy shadow,
     arc=3pt}
 {\mintinline{sql}{#2}}%
+
+\DeclareTotalTCBox{\inlineText}{ s v }{
+    reset,
+    listing only,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colback=corFundoCaixasCodigo,
+    colframe=corTema,
+    drop fuzzy shadow,
+    arc=3pt}
+{\mintinline{text}{#2}}%
 
 % borda em texto
 \newcommand{\cfbox}[1]{%
