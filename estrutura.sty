@@ -217,117 +217,117 @@
 %\makeatother não é necessário em arquivos .sty
 
 % blocos de código
-\NewTCBListing{blocoJava}{ !O{\normalsize} }{
+\NewTCBListing{blocoJava}{ !O{\normalsize} !O{1} }{
     colframe=corTema,
-    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines,firstnumber=#2},
     minted language=java%
 }
 
-\NewTCBListing{blocoC}{ !O{\normalsize} }{
+\NewTCBListing{blocoC}{ !O{\normalsize} !O{1} }{
     colframe=corTema,
-    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines,firstnumber=#2},
     minted language=c%
 }
 
-\NewTCBListing{blocoCPP}{ !O{\normalsize} }{
+\NewTCBListing{blocoCPP}{ !O{\normalsize} !O{1} }{
     colframe=corTema,
-    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines,firstnumber=#2},
     minted language=cpp%
 }
 
-\NewTCBListing{blocoHTML}{ !O{\normalsize} }{
+\NewTCBListing{blocoHTML}{ !O{\normalsize} !O{1} }{
     colframe=corTema,
-    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines,firstnumber=#2},
     minted language=html%
 }
 
-\NewTCBListing{blocoJavaScript}{ !O{\normalsize} }{
+\NewTCBListing{blocoJavaScript}{ !O{\normalsize} !O{1} }{
     colframe=corTema,
-    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines,firstnumber=#2},
     minted language=javascript%
 }
 
-\NewTCBListing{blocoCSS}{ !O{\normalsize} }{
+\NewTCBListing{blocoCSS}{ !O{\normalsize} !O{1} }{
     colframe=corTema,
-    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines,firstnumber=#2},
     minted language=css%
 }
 
-\NewTCBListing{blocoSQL}{ !O{\normalsize} }{
+\NewTCBListing{blocoSQL}{ !O{\normalsize} !O{1} }{
     colframe=corTema,
-    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines,firstnumber=#2},
     minted language=sql%
 }
 
-\NewTCBListing{blocoText}{ !O{\normalsize} }{
+\NewTCBListing{blocoText}{ !O{\normalsize} !O{1} }{
     colframe=corTema,
-    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#1,linenos,numbersep=3mm,breaklines,firstnumber=#2},
     minted language=text%
 }
 
 
 % arquivos de código
-\NewTCBInputListing{\arquivoJava}{ m m !O{\normalsize} }{%
+\NewTCBInputListing{\arquivoJava}{ m m !O{\normalsize} !O{1} }{%
     title=\texttt{#1},
     listing file={#2},
     colframe=corTema,
-    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines,firstnumber=#4},
     minted language=java
 }
 
-\NewTCBInputListing{\arquivoC}{ m m !O{\normalsize} }{%
+\NewTCBInputListing{\arquivoC}{ m m !O{\normalsize} !O{1} }{%
     title=\texttt{#1},
     listing file={#2},
     colframe=corTema,
-    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines,firstnumber=#4},
     minted language=c
 }
 
-\NewTCBInputListing{\arquivoCPP}{ m m !O{\normalsize} }{%
+\NewTCBInputListing{\arquivoCPP}{ m m !O{\normalsize} !O{1} }{%
     title=\texttt{#1},
     listing file={#2},
     colframe=corTema,
-    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines,firstnumber=#4},
     minted language=cpp
 }
 
-\NewTCBInputListing{\arquivoHTML}{ m m !O{\normalsize} }{%
+\NewTCBInputListing{\arquivoHTML}{ m m !O{\normalsize} !O{1} }{%
     title=\texttt{#1},
     listing file={#2},
     colframe=corTema,
-    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines,firstnumber=#4},
     minted language=html
 }
 
-\NewTCBInputListing{\arquivoJavaScript}{ m m !O{\normalsize} }{%
+\NewTCBInputListing{\arquivoJavaScript}{ m m !O{\normalsize} !O{1} }{%
     title=\texttt{#1},
     listing file={#2},
     colframe=corTema,
-    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines,firstnumber=#4},
     minted language=javascript
 }
 
-\NewTCBInputListing{\arquivoCSS}{ m m !O{\normalsize} }{%
+\NewTCBInputListing{\arquivoCSS}{ m m !O{\normalsize} !O{1} }{%
     title=\texttt{#1},
     listing file={#2},
     colframe=corTema,
-    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines,firstnumber=#4},
     minted language=css
 }
 
-\NewTCBInputListing{\arquivoSQL}{ m m !O{\normalsize} }{%
+\NewTCBInputListing{\arquivoSQL}{ m m !O{\normalsize} !O{1} }{%
     title=\texttt{#1},
     listing file={#2},
     colframe=corTema,
-    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines,firstnumber=#4},
     minted language=sql
 }
 
-\NewTCBInputListing{\arquivoText}{ m m !O{\normalsize} }{%
+\NewTCBInputListing{\arquivoText}{ m m !O{\normalsize} !O{1} }{%
     title=\texttt{#1},
     listing file={#2},
     colframe=corTema,
-    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines},
+    minted options={fontsize=#3,linenos,numbersep=3mm,breaklines,firstnumber=#4},
     minted language=text
 }
 
